@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Scan Text</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="label_result">Result</string>
+    <string name="message_no_text_found">Tidak ada text</string>
+    <string name="message_permission_not_granted">Permissions not granted.</string>
 </resources>
