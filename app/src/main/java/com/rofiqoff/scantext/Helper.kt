@@ -7,6 +7,10 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.lifecycle.LifecycleOwner
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.Locale
+
+const val FILENAME_FORMAT = "dd-MMM-yyyy-hh-mm-ss"
 
 fun ProcessCameraProvider.bind(
     lifecycleOwner: LifecycleOwner,
@@ -30,4 +34,10 @@ fun Activity.getOutputDirectory(): File {
     }
     return if (mediaDir != null && mediaDir.exists())
         mediaDir else filesDir
+}
+
+fun fileNameFormat() {
+    SimpleDateFormat(
+        FILENAME_FORMAT, Locale.US
+    ).format(System.currentTimeMillis())
 }

@@ -17,8 +17,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.rofiqoff.scantext.databinding.ActivityMainBinding
 import java.io.File
-import java.text.SimpleDateFormat
-import java.util.Locale
 import java.util.concurrent.Executors
 
 class MainActivity : AppCompatActivity() {
@@ -127,9 +125,7 @@ class MainActivity : AppCompatActivity() {
 
         val photoFile = File(
             outputDirectory,
-            SimpleDateFormat(
-                FILENAME_FORMAT, Locale.US
-            ).format(System.currentTimeMillis()) + ".jpg"
+            "${fileNameFormat()}.jpg"
         )
 
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
@@ -155,7 +151,5 @@ class MainActivity : AppCompatActivity() {
     private companion object {
         const val REQUEST_CODE_PERMISSIONS = 10
         val REQUIRED_PERMISSIONS = arrayOf(CAMERA)
-
-        const val FILENAME_FORMAT = "dd-MMM-yyyy-hh-mm-ss"
     }
 }

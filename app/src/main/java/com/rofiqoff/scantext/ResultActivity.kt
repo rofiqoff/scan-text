@@ -2,8 +2,11 @@ package com.rofiqoff.scantext
 
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.Text
 import com.google.mlkit.vision.text.TextRecognition
@@ -14,6 +17,10 @@ import java.io.File
 class ResultActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityResultBinding
+
+    private val reference: StorageReference by lazy {
+        FirebaseStorage.getInstance().reference.child("Document")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +36,7 @@ class ResultActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        addBackButton()
+        initActionBar()
 
         val path = intent?.getStringExtra(PARAM_FILE_PATH) ?: ""
 
@@ -39,9 +46,11 @@ class ResultActivity : AppCompatActivity() {
         readTextFromImage(uri)
     }
 
-    private fun addBackButton() {
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = getString(R.string.label_result)
+    private fun initActionBar() {
+        supportActionBar?.apply {
+            title = getString(R.string.label_result)
+            setDisplayHomeAsUpEnabled(true)
+        }
     }
 
     private fun readTextFromImage(image: Uri) {
@@ -66,9 +75,26 @@ class ResultActivity : AppCompatActivity() {
             finalText += "\n"
         }
 
+        uploadText(finalText)
+
         binding.tvResult.text = finalText.ifEmpty {
             getString(R.string.message_no_text_found)
         }
+    }
+
+    private fun uploadText(text: String) {
+        if (text.isEmpty()) return
+
+        val fileName = fileNameFormat()
+
+        reference.child("$fileName.txt").putBytes(text.toByteArray())
+            .addOnSuccessListener {
+                Log.e("tagLog", "success upload to firebase")
+            }
+            .addOnFailureListener {
+                it.printStackTrace()
+                Log.e("tagLog", "failed upload to firebase: ${it.localizedMessage}")
+            }
     }
 
     companion object {
