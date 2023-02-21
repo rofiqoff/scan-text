@@ -8,11 +8,11 @@ This application is a simple app for capture and coverted text on image. And als
 
 ## Firebase Storage Image
 
-<img src="Sreenshoots/firebase-storage.PNG" width="600" height ="300">
+<img src="Screenshots/firebase-storage.PNG" width="600" height ="300">
 
 ## Result
 
-<img src="Sreenshoots/result.PNG" width="500" height ="300">
+<img src="Screenshots/result.PNG" width="500" height ="300">
 
 ## Libraries
 1. [CameraX](https://developer.android.com/training/camerax?hl=id) - to get captured image
