@@ -6,6 +6,9 @@ This application is a simple app for capture and coverted text on image. And als
 
 [![Watch the video]](https://drive.google.com/file/d/1oslvflJKfjqjaNpZ_WGg6EDF8BpdyaY3/view?usp=share_link)
 
+## Sample Image
+Sample image that I use, [here](https://github.com/rofiqoff/scan-text/tree/master/Screenshots/sample.png)
+
 ## Firebase Storage Image
 
 <img src="Screenshots/firebase-storage.PNG" width="600" height ="300">
